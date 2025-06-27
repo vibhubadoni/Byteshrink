@@ -1,0 +1,5 @@
+com\byteshrink\compression\HuffmanCompression.class
+com\byteshrink\ByteShrinkApp.class
+com\byteshrink\HuffmanVisualizerController.class
+com\byteshrink\MainController.class
+com\byteshrink\compression\HuffmanCompression$HuffmanNode.class

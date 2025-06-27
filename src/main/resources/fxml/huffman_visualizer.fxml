@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.byteshrink.HuffmanVisualizerController"
+      spacing="15" alignment="TOP_CENTER" styleClass="main-container">
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button fx:id="uploadTextButton" text="Upload Text File" onAction="#handleUploadText" styleClass="primary-button"/>
+        <Label fx:id="fileNameLabel" text="No file selected" styleClass="file-label"/>
+    </HBox>
+    <Label text="Huffman Tree Visualization" styleClass="section-label"/>
+    <ScrollPane fitToWidth="true" fitToHeight="true" prefHeight="500" prefWidth="700">
+        <Pane fx:id="treePane" minHeight="500" minWidth="700" />
+    </ScrollPane>
+    <Label text="Tree Structure (Text)" styleClass="section-label"/>
+    <TreeView fx:id="huffmanTreeView" prefHeight="200" prefWidth="500"/>
+</VBox> 

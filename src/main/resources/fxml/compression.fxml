@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.byteshrink.MainController"
+            fitToWidth="true" fitToHeight="false">
+    <VBox spacing="20" styleClass="main-container" minHeight="1200">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Button fx:id="backButton" text="← Back to Home" styleClass="secondary-button" />
+        </HBox>
+
+        <TabPane>
+            <Tab text="Compress" closable="false">
+                <VBox spacing="30" styleClass="tab-content">
+                    <VBox spacing="10" styleClass="upload-section grouped-section">
+                        <Label text="Select Files to Compress" styleClass="section-label heading-label"/>
+                        <HBox spacing="15" alignment="CENTER_LEFT">
+                            <Button fx:id="uploadButton" text="📂 Upload Files" onAction="#handleUpload" styleClass="primary-button"/>
+                            <Label fx:id="fileNameLabel" text="No file selected" styleClass="file-label"/>
+                        </HBox>
+                    </VBox>
+                    <VBox spacing="10" styleClass="compression-section grouped-section" VBox.vgrow="ALWAYS">
+                        <Label text="Compression Details" styleClass="section-label heading-label"/>
+                        <TextArea fx:id="fileDetails" editable="false" wrapText="true" prefRowCount="4" styleClass="details-area"/>
+                        <ProgressBar fx:id="progressBar" progress="0.0" maxWidth="Infinity"/>
+                        <HBox spacing="15" alignment="CENTER">
+                            <Button fx:id="compressButton" text="⚙️ Compress" onAction="#handleCompression" styleClass="primary-button"/>
+                            <Button fx:id="clearButton" text="🧹 Clear" onAction="#handleClear" styleClass="secondary-button"/>
+                            <Button fx:id="openCompressedLocation" text="Open Output Location" onAction="#handleOpenCompressedLocation" styleClass="secondary-button" disable="true"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="Decompress" closable="false">
+                <VBox spacing="30" styleClass="tab-content">
+                    <VBox spacing="10" styleClass="upload-section grouped-section">
+                        <Label text="Select Compressed File" styleClass="section-label heading-label"/>
+                        <HBox spacing="15" alignment="CENTER_LEFT">
+                            <Button fx:id="uploadCompressedButton" text="📂 Upload Compressed File" onAction="#handleCompressedUpload" styleClass="primary-button"/>
+                            <Label fx:id="compressedFileLabel" text="No file selected" styleClass="file-label"/>
+                        </HBox>
+                    </VBox>
+                    <VBox spacing="10" styleClass="compression-section grouped-section" VBox.vgrow="ALWAYS">
+                        <Label text="Decompression Details" styleClass="section-label heading-label"/>
+                        <TextArea fx:id="decompressFileDetails" editable="false" wrapText="true" prefRowCount="4" styleClass="details-area"/>
+                        <ProgressBar fx:id="decompressProgressBar" progress="0.0" maxWidth="Infinity"/>
+                        <HBox spacing="15" alignment="CENTER">
+                            <Button fx:id="decompressButton" text="⚙️ Decompress" onAction="#handleDecompression" styleClass="primary-button"/>
+                            <Button fx:id="clearDecompressButton" text="🧹 Clear" onAction="#handleDecompressClear" styleClass="secondary-button"/>
+                            <Button fx:id="openDecompressedLocation" text="Open Output Location" onAction="#handleOpenDecompressedLocation" styleClass="secondary-button" disable="true"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </Tab>
+        </TabPane>
+
+        <VBox spacing="10" styleClass="output-section grouped-section">
+            <Label text="Output" styleClass="section-label heading-label"/>
+            <TextArea fx:id="outputLog" editable="false" wrapText="true" prefRowCount="3" styleClass="output-area"/>
+        </VBox>
+
+        <BarChart fx:id="compressionBarChart" title="Compression Comparison"
+                  categoryGap="30" barGap="10" prefHeight="250" prefWidth="600">
+            <xAxis>
+                <CategoryAxis label="Method" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Size (bytes)" />
+            </yAxis>
+        </BarChart>
+
+        <BarChart fx:id="timeBarChart" title="Compression Time Comparison"
+                  categoryGap="30" barGap="10" prefHeight="250" prefWidth="600">
+            <xAxis>
+                <CategoryAxis label="Method" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Time (ms)" />
+            </yAxis>
+        </BarChart>
+
+        <BarChart fx:id="zoomedBarChart" title="Zoomed Compression Comparison"
+                  categoryGap="30" barGap="10" prefHeight="180" prefWidth="400">
+            <xAxis>
+                <CategoryAxis label="Method" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="zoomedYAxis" label="Size (MB)" lowerBound="7.5" upperBound="7.8" tickUnit="0.05" />
+            </yAxis>
+        </BarChart>
+        <HBox alignment="CENTER" spacing="10">
+            <Label text="🟧 Huffman (Better)" style="-fx-text-fill: orange;"/>
+            <Label text="⇨" style="-fx-font-size: 18px;"/>
+            <Label text="🔴 Shannon-Fano (Less Efficient)" style="-fx-text-fill: red;"/>
+            <Label fx:id="sizeDiffLabel" text="" style="-fx-font-weight: bold;"/>
+        </HBox>
+
+    </VBox>
+</ScrollPane> 
